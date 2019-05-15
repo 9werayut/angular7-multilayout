@@ -1,0 +1,51 @@
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-3">Fluid jumbo heading</h1>
+    <p class="lead">Jumbo helper text</p>
+  </div>
+</div>
+
+<div class="container">
+  <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+
+    <h5 class="text-success" *ngIf="success">Validate success</h5>
+
+    <div class="form-group row">
+      <label for="inputName" class="col-sm-3 col-form-label">Firstname</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" name="firstname" id="firstname" placeholder="First Name" formControlName="firstname" [ngClass]="{'is-invalid': submitted && contactForm.controls.firstname.errors, 'is-valid': submitted && !f.firstname.errors}">
+        <div *ngIf="submitted && f.firstname.errors?.required" class="text-danger">FirstName is required!!</div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputName" class="col-sm-3 col-form-label">Lastname</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Last Name" formControlName="lastname" [ngClass]="{'is-invalid': submitted && f.lastname.errors, 'is-valid': submitted && !f.lastname.errors}">
+        <div *ngIf="submitted && f.lastname.errors?.required" class="text-danger">Lastname is required!!</div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputName" class="col-sm-3 col-form-label">Email</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" name="email" id="email" placeholder="Email" formControlName="email" [ngClass]="{'is-invalid': submitted && f.email.errors, 'is-valid': submitted && !f.email.errors}">
+        <div *ngIf="submitted && f.email.errors?.required" class="text-danger">Email is required!!</div>
+        <div *ngIf="submitted && f.email.errors?.email" class="text-danger">Email not a format address!!</div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputName" class="col-sm-3 col-form-label">Tel</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" name="tel" id="tel" placeholder="Tel" formControlName="tel" [ngClass]="{'is-invalid': submitted && f.tel.errors, 'is-valid': !f.tel.errors}">
+        <div *ngIf="submitted && f.tel.errors?.required" class="text-danger">Tel is required!!</div>
+        <div *ngIf="submitted && f.tel.errors?.minlength" class="text-danger">Tel is requiredLength is 4!!</div>
+      </div>
+    </div>
+    {{contactForm.value | json}}
+    <div class="form-group row">
+      <label for="inputName" class="col-sm-3 col-form-label"></label>
+      <div class="col-sm-9">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </form>
+</div>
